@@ -9,6 +9,16 @@ sessioninfo
 browseVignettes()
 install.packages("learnr")
 install.packages("rmarkdown")
+install.packages("dplyr")
+
+
+# Updating R/RStudio/Tidyverse
+# Only on Windows
+install.packages("installr")
+library(installr)
+updateR()
+# From within RStudio, go to Help > Check for Updates 
+# to install newer version of RStudio (if available, optional).
 
 
 # to use rmarkdown to make pdf, you need to install latex package: tinytex
