@@ -1,15 +1,20 @@
+# To update packages
+old.packages()
+update.packages()
+
 # R packages
 install.packages("devtools")
 install.packages("ggvis")
 install.packages("ggplot2")
 install.packages("lme4")
-old.packages()
 version
 sessioninfo
 browseVignettes()
 install.packages("learnr")
 install.packages("rmarkdown")
 install.packages("dplyr")
+
+
 
 
 # Updating R/RStudio/Tidyverse
@@ -21,11 +26,13 @@ updateR()
 # to install newer version of RStudio (if available, optional).
 
 
+
 # to use rmarkdown to make pdf, you need to install latex package: tinytex
 install.packages('tinytex')
 tinytex::install_tinytex()
 # to uninstall TinyTeX, run tinytex::uninstall_tinytex() 
 tinytex:::is_tinytex() 
+
 
 
 
@@ -45,3 +52,11 @@ install_from_swirl("R Programming")
 # Start swirl and complete the lessons
 swirl()
 
+# installing swirl() courses
+install_course("R Programming")
+install_course("R Programming E")
+install_course("The R Programming Environment")
+install_course("Regression Models")
+install_course("Getting and Cleaning Data")
+install_course("Statistical Inference")
+install_course("Advanced R Programming")
