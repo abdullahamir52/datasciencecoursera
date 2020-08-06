@@ -38,10 +38,11 @@ my_na
 # as a method of testing for equality between two objects. So, you might think the
 # expression my_data == NA yields the same results as is.na(). Give it a try.
 my_data == NA 
-# [1] NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA
-# [30] NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA
-# [59] NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA
-# [88] NA NA NA NA NA NA NA NA NA NA NA NA NA
+# [1] NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA
+# [25] NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA
+# [49] NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA
+# [73] NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA
+# [97] NA NA NA NA
 
 # The reason you got a vector of all NAs is that NA is not really a value, but just
 # a placeholder for a quantity that is not available. Therefore the logical
@@ -69,21 +70,26 @@ sum(my_na)
 # Pretty cool, huh? Finally, let's take a look at the data to convince ourselves
 # that everything 'adds up'. Print my_data to the console.
 my_data
-# [1]          NA          NA          NA          NA          NA          NA          NA
-# [8] -0.22745375 -1.07159983 -0.65239804 -1.22185092  0.71942924          NA          NA
-# [15]  0.88901103 -0.14207632          NA          NA          NA          NA          NA
-# [22] -1.00349400          NA  0.19910659  1.26259993          NA  0.54895386          NA
-# [29]          NA  0.96030564 -0.57209626          NA          NA          NA  0.37375932
-# [36] -0.29049346  0.04181300 -0.78110094          NA  2.25621272 -0.01460178          NA
-# [43]  1.13546389          NA          NA  1.45715157  1.34628286          NA -1.91537326
-# [50]          NA -1.21524897          NA -0.50980397          NA          NA -0.12438872
-# [57]          NA  1.97266141 -1.16585880          NA -0.53264403  1.59033203  0.16643566
-# [64]          NA          NA  1.33774874 -1.40041588 -0.28455642          NA          NA
-# [71]  1.45400358 -0.48275389          NA          NA          NA  0.37908496          NA
-# [78]          NA -0.07350431          NA -1.35249022 -0.24011631          NA  0.03760834
-# [85]          NA -1.45187064 -0.54159603          NA          NA -0.55922836  0.71217843
-# [92]          NA          NA -1.32395873 -0.81430432 -1.01087355          NA -0.36183739
-# [99] -1.15176292          NA
+# [1]          NA          NA          NA          NA          NA
+# [6]          NA          NA -0.22745375 -1.07159983 -0.65239804
+# [11] -1.22185092  0.71942924          NA          NA  0.88901103
+# [16] -0.14207632          NA          NA          NA          NA
+# [21]          NA -1.00349400          NA  0.19910659  1.26259993
+# [26]          NA  0.54895386          NA          NA  0.96030564
+# [31] -0.57209626          NA          NA          NA  0.37375932
+# [36] -0.29049346  0.04181300 -0.78110094          NA  2.25621272
+# [41] -0.01460178          NA  1.13546389          NA          NA
+# [46]  1.45715157  1.34628286          NA -1.91537326          NA
+# [51] -1.21524897          NA -0.50980397          NA          NA
+# [56] -0.12438872          NA  1.97266141 -1.16585880          NA
+# [61] -0.53264403  1.59033203  0.16643566          NA          NA
+# [66]  1.33774874 -1.40041588 -0.28455642          NA          NA
+# [71]  1.45400358 -0.48275389          NA          NA          NA
+# [76]  0.37908496          NA          NA -0.07350431          NA
+# [81] -1.35249022 -0.24011631          NA  0.03760834          NA
+# [86] -1.45187064 -0.54159603          NA          NA -0.55922836
+# [91]  0.71217843          NA          NA -1.32395873 -0.81430432
+# [96] -1.01087355          NA -0.36183739 -1.15176292          NA
 
 # Now that we've got NAs down pat, let's look at a second type of missing value --
 # NaN, which stands for 'not a number'. To generate NaN, try dividing (using a
