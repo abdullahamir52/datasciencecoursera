@@ -1,5 +1,5 @@
 # -----------------------------------------------------
-# Chapter NUMBER 7: R Programming Matrices and Data Frames
+# Chapter 7: Matrices and Data Frames
 
 # The main difference, as you'll see, is that matrices can only contain a single
 # class of data, while data frames can consist of many different classes of data.
@@ -10,15 +10,18 @@ my_vector <- 1:20
 
 # View the contents of the vector you just created.
 my_vector
+# [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20
 
 # The dim() function tells us the 'dimensions' of an object. What happens if we do
 # dim(my_vector)? Give it a try.
 dim(my_vector)
+# NULL
 
-# Clearly, that's not very helpful! Since my_vector is a vector, it doesn't have a
-# `dim` attribute (so it's just NULL), but we can find its length using the length()
-# function. Try that now.
+# Clearly, that's not very helpful! Since my_vector is a vector, it doesn't 
+# have a `dim` attribute (so it's just NULL), but we can find its length 
+# using the length() function. Try that now.
 length(my_vector)
+# [1] 20
 
 # Ah! That's what we wanted. But, what happens if we give my_vector a `dim`
 # attribute? Let's give it a try. Type dim(my_vector) <- c(4, 5).
@@ -32,24 +35,34 @@ dim(my_vector) <- c(4,5)
 
 # Use dim(my_vector) to confirm that we've set the `dim` attribute correctly.
 dim(my_vector)
+# [1] 4 5
+
 # alternatively
 attributes(my_vector)
+# $dim
+# [1] 4 5
 
 # But, wait! That doesn't sound like a vector any more. Well, it's not. Now it's a
 # matrix. View the contents of my_vector now to see what it looks like.
 my_vector
+#       [,1] [,2] [,3] [,4] [,5]
+# [1,]    1    5    9   13   17
+# [2,]    2    6   10   14   18
+# [3,]    3    7   11   15   19
+# [4,]    4    8   12   16   20
 
 # Now, let's confirm it's actually a matrix by using the class() function.
 class(my_vector)
+# [1] "matrix" "array" 
 
 # Sure enough, my_vector is now a matrix. We should store it in a new variable that
 # helps us remember what it is. Store the value of my_vector in a new variable
 # called my_matrix.
 my_matrix <- my_vector
 
-# The example that we've used so far was meant to illustrate the point that a matrix
-# is simply an atomic vector with a dimension attribute. A more direct method of
-# creating the same matrix uses the matrix() function.
+# The example that we've used so far was meant to illustrate the point that a 
+# matrix is simply an atomic vector with a dimension attribute. A more direct 
+# method of creating the same matrix uses the matrix() function.
 ?matrix
 
 # Now, look at the documentation for the matrix function and see if you can figure
@@ -57,10 +70,27 @@ my_matrix <- my_vector
 # rows, 5 columns) by calling the matrix() function. Store the result in a variable
 # called my_matrix2.
 my_matrix2 <- matrix(1:20, nrow = 4, ncol = 5)
+#       [,1] [,2] [,3] [,4] [,5]
+# [1,]    1    5    9   13   17
+# [2,]    2    6   10   14   18
+# [3,]    3    7   11   15   19
+# [4,]    4    8   12   16   20
+
+# also with dimnames and setting byrow = TRUE
+my_mat <- matrix(1:20, nrow=4, ncol=5, byrow = TRUE, 
+                 dimnames = list(c("R1","R2","R3","R4"), 
+                                 c("C1","C2","C3","C4","C5")))
+#    C1 C2 C3 C4 C5
+# R1  1  2  3  4  5
+# R2  6  7  8  9 10
+# R3 11 12 13 14 15
+# R4 16 17 18 19 20
+
 
 # Finally, let's confirm that my_matrix and my_matrix2 are actually identical. The
 # identical() function will tell us if its first two arguments are the same.
 identical(my_matrix,my_matrix2)
+# [1] TRUE
 
 # Now, imagine that the numbers in our table represent some measurements from a
 # clinical experiment, where each row represents one patient and each column
@@ -79,6 +109,11 @@ patients <- c("Bill", "Gina", "Kelly", "Sean")
 # the result in a new variable. Just call cbind() with two arguments -- the patients
 # vector and my_matrix.
 cbind(patients,my_matrix)
+#      patients                       
+# [1,] "Bill"   "1" "5" "9"  "13" "17"
+# [2,] "Gina"   "2" "6" "10" "14" "18"
+# [3,] "Kelly"  "3" "7" "11" "15" "19"
+# [4,] "Sean"   "4" "8" "12" "16" "20"
 
 # Something is fishy about our result! It appears that combining the character
 # vector with our matrix of numbers caused everything to be enclosed in double
@@ -101,17 +136,23 @@ my_data <- data.frame(patients, my_matrix)
 
 # Now view the contents of my_data to see what we've come up with.
 my_data
+#   patients X1 X2 X3 X4 X5
+# 1     Bill  1  5  9 13 17
+# 2     Gina  2  6 10 14 18
+# 3    Kelly  3  7 11 15 19
+# 4     Sean  4  8 12 16 20
 
-# It looks like the data.frame() function allowed us to store our character vector
-# of names right alongside our matrix of numbers. That's exactly what we were hoping
-# for!
+# It looks like the data.frame() function allowed us to store our character 
+# vector of names right alongside our matrix of numbers. That's exactly what 
+# we were hoping for!
 
-# Behind the scenes, the data.frame() function takes any number of arguments and
-# returns a single object of class `data.frame` that is composed of the original
-# objects.
+# Behind the scenes, the data.frame() function takes any number of arguments 
+# and returns a single object of class `data.frame` that is composed 
+# of the original objects.
 
 # Let's confirm this by calling the class() function on our newly created data frame.
 class(my_data)
+# [1] "data.frame"
 
 # It's also possible to assign names to the individual rows and columns of a data
 # frame, which presents another possible way of determining which row of values in
@@ -134,3 +175,8 @@ colnames(my_data) <- cnames
 
 # Let's see if that got the job done. Print the contents of my_data.
 my_data
+#   patient age weight bp rating test
+# 1    Bill   1      5  9     13   17
+# 2    Gina   2      6 10     14   18
+# 3   Kelly   3      7 11     15   19
+# 4    Sean   4      8 12     16   20
