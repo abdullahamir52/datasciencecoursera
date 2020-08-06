@@ -1,5 +1,5 @@
 # -----------------------------------------------------
-# Chapter NUMBER 2: R Programming Workspace and Files
+# Chapter 2: Workspace and Files
 
 # Determine the current working directory
 getwd()

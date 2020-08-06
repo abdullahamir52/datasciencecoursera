@@ -1,5 +1,5 @@
 # -----------------------------------------------------
-# Chapter NUMBER 3: R Programming Sequences of Numbers
+# Chapter 3: Sequences of Numbers
 
 # The simplest way to create a sequence of numbers in R is by using the `:`
 # operator. Type 1:20 to see how it works.

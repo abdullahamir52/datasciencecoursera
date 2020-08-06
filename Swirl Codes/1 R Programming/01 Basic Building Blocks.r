@@ -1,5 +1,5 @@
 # ----------------------------------------
-# Chapter NUMBER 1: Basic Building Blocks
+# Chapter 1: Basic Building Blocks
 
 # Making a vector, using the concatenate function, c()
 z <- c(1.1, 9, 3.14)
