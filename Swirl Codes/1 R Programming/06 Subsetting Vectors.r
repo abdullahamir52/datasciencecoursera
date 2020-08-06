@@ -1,5 +1,5 @@
 # -----------------------------------------------------
-# Chapter NUMBER 6: R Programming Subsetting Vectors 
+# Chapter 6: Subsetting Vectors 
 
 # In this lesson, we'll see how to extract elements from a vector based on some
 # conditions that we specify.
@@ -26,6 +26,8 @@ x
 
 # For a simple example, try x[1:10] to view the first ten elements of x.
 x[1:10]
+# [1] -0.58509601          NA          NA          NA -0.34577076 -0.02044906
+# [7]  1.44509502  0.27292469          NA          NA
 
 # Index vectors come in four different flavors -- logical vectors, vectors of
 # positive integers, vectors of negative integers, and vectors of character strings
@@ -40,12 +42,17 @@ x[1:10]
 # What do you think x[is.na(x)] will give you?
 # A vector of all NAs
 x[is.na(x)]
+# [1] NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA
 
 # Recall that `!` gives us the negation of a logical expression, so !is.na(x) can be
 # read as 'is not NA'. Therefore, if we want to create a vector called y that
 # contains all of the non-NA values from x, we can use y <- x[!is.na(x)].
 y <- x[!is.na(x)]
 y
+# [1] -0.58509601 -0.34577076 -0.02044906  1.44509502  0.27292469 -0.32843572
+# [7]  0.49251228 -0.46553166 -0.09544577 -0.79863018  0.52265533 -1.59580150
+# [13] -0.55158946 -0.39053555  0.12161582  1.60741751  1.73837257  0.01000722
+# [19]  0.92222111  0.97939285
 
 # Now that we've isolated the non-missing values of x and put them in y, we can
 # subset y as we please.
@@ -55,11 +62,18 @@ y
 # and FALSEs corresponding to values of y that are less than or equal to zero. What
 # do you think y[y > 0] will give you?
 # > A vector of all the positive elements of y
-y[y>0]
+y[ y > 0]
+# [1] 1.44509502 0.27292469 0.49251228 0.52265533 0.12161582 1.60741751 1.73837257
+# [8] 0.01000722 0.92222111 0.97939285
 
 # You might wonder why we didn't just start with x[x > 0] to isolate the positive
 # elements of x. Try that now to see why.
-x[x > 0]
+# x[ x > 0]
+# [1]         NA         NA         NA 1.44509502 0.27292469         NA
+# [7]         NA         NA         NA 0.49251228         NA         NA
+# [13] 0.52265533         NA         NA         NA         NA         NA
+# [19]         NA         NA 0.12161582         NA 1.60741751 1.73837257
+# [25] 0.01000722         NA 0.92222111 0.97939285         NA         NA
 
 # Since NA is not a value, but rather a placeholder for an unknown quantity, the
 # expression NA > 0 evaluates to NA. Hence we get a bunch of NAs mixed in with our
@@ -68,6 +82,8 @@ x[x > 0]
 # Combining our knowledge of logical operators with our new knowledge of subsetting,
 # we could do this -- x[!is.na(x) & x > 0]. Try it out.
 x[!is.na(x) & x > 0]
+# [1] 1.44509502 0.27292469 0.49251228 0.52265533 0.12161582 1.60741751
+# [7] 1.73837257 0.01000722 0.92222111 0.97939285
 
 # In this case, we request only values of x that are both non-missing AND greater
 # than zero.
@@ -80,10 +96,16 @@ x[!is.na(x) & x > 0]
 # Can you figure out how we'd subset the 3rd, 5th, and 7th elements of x? Hint 
 # Use the c() function to specify the element numbers as a numeric vector.
 x[c(3,5,7)]
+# [1]         NA -0.3457708  1.4450950
 
+# What about asking it 0th element or something that is greater than the length
+# of the vector? 
 
 x[0]
+# numeric(0)
 x[3000]
+# [1] NA
+
 # R doesn't prevent us from asking for it. This should be
 # a cautionary tale. You should always make sure that what you are asking for is
 # within the bounds of the vector you're working with.
@@ -108,10 +130,13 @@ vect <- c(foo = 11, bar = 2, norf = NA)
 # When we print vect to the console, you'll see that each element has a name. Try it
 # out.
 vect
+# foo  bar norf 
+# 11    2   NA 
 
 # We can also get the names of vect by passing vect as an argument to the names()
 # function. Give that a try.
 names(vect)
+# [1] "foo"  "bar"  "norf"
 
 # Alternatively, we can create an unnamed vector vect2 with c(11, 2, NA).
 vect2 <- c(11, 2, NA)
@@ -122,10 +147,15 @@ names(vect2) <- c("foo", "bar", "norf")
 # Now, let's check that vect and vect2 are the same by passing them as arguments to
 # the identical() function.
 identical(vect,vect2)
+# [1] TRUE
 
 # Now, back to the matter of subsetting a vector by named elements. Which of the
 # following commands do you think would give us the second element of vect?
 vect["bar"]
+# bar 
+# 2 
 
 # Likewise, we can specify a vector of names with
 vect[c("foo", "bar")]
+# foo bar 
+# 11   2 
