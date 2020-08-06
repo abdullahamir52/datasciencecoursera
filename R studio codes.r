@@ -1,5 +1,6 @@
 # To clear the environment in rstudio
 Ctrl + Shift + F10
+rm(list=ls())
 
 # To clear the console
 Ctrl + L
