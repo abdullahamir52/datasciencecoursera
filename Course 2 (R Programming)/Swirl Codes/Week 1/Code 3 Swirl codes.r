@@ -18,25 +18,27 @@
 
 
 
-
 # ----------------------------------------
 # Chapter NUMBER 1: Basic Building Blocks
 
 # Making a vector, using the concatenate function, c()
-z<- c(1.1, 9, 3.14)
+z <- c(1.1, 9, 3.14)
 
 # Asking question about a function
-?c
+?subset
 
 # Concatenate vectors with new values
 c(z,555,z)
+# [1]   1.10   9.00   3.14 555.00   1.10   9.00   3.14
 
 # Arithmatic expressions
 z * 2 + 100
+# [1] 102.20 118.00 106.28
+
 # multiplies everything in z with 2 and then adds 100 with each element
 # To take the square root, use the sqrt() function and to take the
 # absolute value, use the abs() function.
-# z * 2 + 100 = z * c(2, 2, 2) + c(100, 100, 100).
+# basically, z * 2 + 100 = z * c(2, 2, 2) + c(100, 100, 100).
 # R recycles the shorter vector until it is the same length of the longer one
 
 # type the first two letters of a variable and hit the tabkey,
@@ -92,6 +94,8 @@ file.info("mytest.R")
 
 # You can use the $ operator --- e.g., file.info("mytest.R")$mode --- to grab
 # specific items.
+file.info("mytest.r")$mtime
+file.info("mytest.r")$exe
 
 # Change the name of the file "mytest.R" to "mytest2.R" by using file.rename().
 file.rename("mytest.R", "mytest2.R")
@@ -105,14 +109,14 @@ file.copy("mytest2.R", "mytest3.R")
 # Provide the relative path to the file "mytest3.R" by using file.path().
 file.path("mytest3.R")
 
-# You can use file.path to construct file and directory paths that are independent
-# of the operating system your R code is running on. Pass 'folder1' and 'folder2'
-# as arguments to file.path to make a platform-independent pathname.
+# You can use file.path to construct file and directory paths that are 
+# independent of the operating system your R code is running on. Pass 'folder1' 
+# and 'folder2' as arguments to file.path to make a platform-independent pathname.
 file.path("folder1", "folder2")
 
-# Take a look at the documentation for dir.create by entering ?dir.create . Notice
-# the 'recursive' argument. In order to create nested directories, 'recursive' must
-# be set to TRUE.
+# Take a look at the documentation for dir.create by entering ?dir.create . 
+# Notice the 'recursive' argument. In order to create nested directories, 
+# 'recursive' must be set to TRUE.
 ?dir.create
 
 # Create a directory in the current working directory called "testdir2" and a
@@ -173,6 +177,7 @@ my_seq<- seq(5,10, length = 30)
 
 # To confirm that my_seq has length 30, we can use the length() function.
 length(my_seq)
+# [1] 30
 
 # Let's pretend we don't know the length of my_seq, but we want to generate a
 # sequence of integers from 1 to N, where N represents the length of the my_seq
@@ -181,26 +186,30 @@ length(my_seq)
 # There are several ways we could do this. One possibility is to combine the `:`
 # operator and the length() function like this: 1:length(my_seq). Give that a try.
 1:length(my_seq)
+# 1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 
+# 26 27 28 29 30
+
 # Another option is to use seq(along.with = my_seq). Give that a try.
 seq(along.with = my_seq)
-# Another option is to use seq(along.with = my_seq). Give that a try.
-seq(along.with = my_seq)
+
 # However, as is the case with many common tasks, R has a separate built-in function
 # for this purpose called seq_along(). Type seq_along(my_seq) to see it in action.
 seq_along(my_seq)
 
 # creating a vector that contains 40 zeros, we can use rep(0, times = 40).
 rep(0, times = 40)
+#  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 
 # If instead we want our vector to contain 10 repetitions of the vector (0, 1, 2),
 # we can do rep(c(0, 1, 2), times = 10). Go ahead.
 rep(c(0, 1, 2), times = 10)
+# [1] 0 1 2 0 1 2 0 1 2 0 1 2 0 1 2 0 1 2 0 1 2 0 1 2 0 1 2 0 1 2
 
 # Finally, let's say that rather than repeating the vector (0, 1, 2) over and over
 # again, we want our vector to contain 10 zeros, then 10 ones, then 10 twos. We can
 # do this with the `each` argument. Try rep(c(0, 1, 2), each = 10).
 rep(c(0, 1, 2), each = 10)
-
+#  [1] 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2
 
 
 
