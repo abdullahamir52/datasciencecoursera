@@ -18,7 +18,6 @@ y <- if(x > 3) {
 
 
 
-
 # For loop
 # -------------
 # for loops take an interator variable and assign it successive values from a 
