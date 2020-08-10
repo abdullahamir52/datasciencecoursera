@@ -1,4 +1,4 @@
-# -----------------------------------------------------
+# ----------------------------------------------------
 # Chapter 2: Workspace and Files
 
 # Determine the current working directory

@@ -1,4 +1,4 @@
-# ----------------------------------------
+# ---------------------------------------
 # Chapter 1: Basic Building Blocks
 
 # Making a vector, using the concatenate function, c()
