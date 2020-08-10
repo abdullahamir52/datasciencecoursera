@@ -32,7 +32,7 @@ install.packages('tinytex')
 tinytex::install_tinytex()
 # to uninstall TinyTeX, run tinytex::uninstall_tinytex() 
 tinytex:::is_tinytex() 
-
+# install at the very last. takes too long to install
 
 
 
@@ -60,3 +60,11 @@ install_course("Regression Models")
 install_course("Getting and Cleaning Data")
 install_course("Statistical Inference")
 install_course("Advanced R Programming")
+
+# Creating a path for Rtools
+writeLines('PATH="${RTOOLS40_HOME}\\usr\\bin;${PATH}"', con = "~/.Renviron")
+# then restart R (Ctrl + shift + F10)
+Sys.which("make")
+#                                         make 
+# "C:\\PROGRA~1\\rtools40\\usr\\bin\\make.exe" 
+install.packages("jsonlite", type = "source")
