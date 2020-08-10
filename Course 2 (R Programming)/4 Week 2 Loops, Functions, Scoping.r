@@ -183,7 +183,8 @@ for(i in 1:40)
 
 
 # Writing my own function
-# How to use the function syntax, specify the arguments, and how to return a value
+# How to use the function syntax, specify the arguments, and 
+# how to return a value
 
 
 # We will write a function that adds two values
