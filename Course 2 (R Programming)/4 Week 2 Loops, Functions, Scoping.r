@@ -19,7 +19,7 @@ y <- if(x > 3) {
 
 
 # For loop
-# -------------
+# ----------------
 # for loops take an interator variable and assign it successive values from a 
 # sequence or vector. For loops are most commonly used for iterating over the 
 # elements of an object (list, vector, etc.). i is the loop index in for loop
