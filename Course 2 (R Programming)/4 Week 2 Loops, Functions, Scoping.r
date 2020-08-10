@@ -196,6 +196,7 @@ add2 <- function(x,y)
 }
 
 add2(3,5)
+# [1] 8
 
 
 # Vector of numbers, return the subset of the vector's values above 10
@@ -206,8 +207,10 @@ above10 <- function(x) {
   x[use]
   # the last line is the return value, subsets the values in x > 10.
 }
+
 # give the function a value to give a result
 above10(x)
+#  [1] 11 12 13 14 15 16 17 18 19 20
 
 
 # creating a function that subsets values above any number that you can specify
@@ -216,8 +219,10 @@ above <- function(x,n) {
   use <- x > n 
   x[use]
 }
+
 # give it a value to give a result; otherwise gives an error (n not specified)
 above(x,12)
+# [1] 13 14 15 16 17 18 19 20
 
 
 # using a specified default value of n 
@@ -226,8 +231,10 @@ above <- function(x,n = 10) {
   use <- x > n 
   x[use]
 }
+
 # give it a value to give a result; otherwise gives an error (n not specified)
 above(x)
+# [1] 11 12 13 14 15 16 17 18 19 20
 
 
 
@@ -245,7 +252,10 @@ columnmean <- function(y) { # y is going to be the df/matrix in question
     means
     # this is the last expression in the function = return value 
 }
+
 columnmean(airquality)
+# [1]        NA        NA  9.957516 77.882353  6.993464 15.803922
+
 # gives us six values. 2 of them are NA, bcz some columns have missing values
 # so add an argument to change the NA values 
 
@@ -259,8 +269,9 @@ columnmean <- function(y, removeNA = TRUE) {
   }
   means
 }
-columnmean(airquality)
 
+columnmean(airquality)
+# [1]  42.129310 185.931507   9.957516  77.882353   6.993464  15.803922
 
 
 
@@ -281,14 +292,26 @@ sd(x = mydata) # specifying argument by naming it
 sd(x = mydata, na.rm = FALSE) # whether to exclude the missing values or not
 sd(na.rm = FALSE, x = mydata) # Order does not matter if you name the args
 sd(na.rm = FALSE, mydata) 
-# if you name an arg, then the arg w/o name gets assigned in a chronological order 
+
+# Output of all of the 'sd' commands
+# [1] 0.9510843
+
+# if you name an arg, then the arg w/o name gets assigned in a 
+# chronological order 
+
 
 # Argument matching
 # You can mix positional matching with matching by name. When an argument is 
 # matched by name, it is “taken out” of the argument list and the remaining 
 # unnamed arguments are matched in the order that they are listed in the 
 # function definition
+
 args(lm) # this shows the arguments of lm() function
+# Output
+# function (formula, data, subset, weights, na.action, method = "qr", 
+#           model = TRUE, x = FALSE, y = FALSE, qr = TRUE, singular.ok = TRUE, 
+#           contrasts = NULL, offset, ...) 
+#   NULL
 
 # The following two calls are equivalent.
 lm(data = mydata, y - x, model = FALSE, 1:100)
@@ -320,16 +343,21 @@ f <- function(a, b = 1, c = 2, d = NULL) {
 f <- function(a, b) {
   a^2
 }
+
 f(2)
+# [1] 4
 
 # Again
 f <- function(a, b) {
   print(a)
   print(b)
 }
+
 f(45)
+# Output
 ## [1] 45
 ## Error: argument "b" is missing, with no default
+
 # Notice that “45” got printed first before the error was triggered. 
 # This is because b did not have to be evaluated until after print(a). 
 # Once the function tried to evaluate print(b) it had to throw an error.
@@ -350,40 +378,51 @@ UseMethod("mean")
 # The ... argument is also necessary when the number of arguments 
 # passed to the function cannot be known in advance.
 args(paste)
+# function (..., sep = " ", collapse = NULL, recycle0 = FALSE) 
+#   NULL
 args(cat)
+# function (..., file = "", sep = " ", fill = FALSE, 
+#           labels = NULL, append = FALSE) 
+#   NULL
+
 
 # Arguments Coming After the “...” Argument
 # One catch with ... is that any arguments that appear after ... on the 
 # argument list must be named explicitly and cannot be partially matched.
 args(paste)
-paste("a", "b", sep = ":")
-paste("a", "b", se = ":")
 
+paste("a", "b", sep = ":")
+# [1] "a:b"
+paste("a", "b", se = ":")
+# [1] "a b :"
 
 
 # How does R know which value to assign to which symbol? When I type: 
 lm <- function(x) { x * x }
 lm
+# function(x) { x * x }
+
 # how does R know what value to assign to the symbol lm? 
 # Why doesn’t it give it the value of lm that is in the stats package?
 
-# When R tries to bind a value to a symbol, it searches through a series of environments to find the
-# appropriate value. When you are working on the command line and need to retrieve the value of an
-# R object, the order is roughly
+# When R tries to bind a value to a symbol, it searches through a series of 
+# environments to find the appropriate value. When you are working on the 
+# command line and need to retrieve the value of an R object, 
+# the order is roughly
 # 1. Search the global environment for a symbol name matching the one requested.
 # 2. Search the namespaces of each of the packages on the search list
 # The search list can be found by using the search function.
 search()
 
-# The global environment or the user’s workspace is always the first element of the search list and
-# the base package is always the last.
-# The order of the packages on the search list matters!
-# User’s can configure which packages get loaded on startup so you cannot assume that there will
-# be a set list of packages available.
-# When a user loads a package with library the namespace of that package gets put in position
-# 2 of the search list (by default) and everything else gets shifted down the list.
-# Note that R has separate namespaces for functions and non-functions so it’s possible to have an
-# object named c and a function named c.
+# The global environment or the user’s workspace is always the first element of 
+# the search list and the base package is always the last.
+# The order of the packages on the search list matters! User’s can configure 
+# which packages get loaded on startup so you cannot assume that there will be
+# a set list of packages available. When a user loads a package with library 
+# the namespace of that package gets put in position 2 of the search list 
+# (by default) and everything else gets shifted down the list. Note that R 
+# has separate namespaces for functions and non-functions so it’s possible 
+# to have an object named c and a function named c.
 
 
 # Lexical Scoping
@@ -391,24 +430,25 @@ search()
 f <- function(x, y) {
   x^2 + y / z
 }
-# This function has 2 formal arguments x and y. In the body of the function there is another symbol z.
-# In this case z is called a free variable. The scoping rules of a language determine how values are
-# assigned to free variables. Free variables are not formal arguments and are not local variables
-# (assigned insided the function body).
+# This function has 2 formal arguments x and y. In the body of the function 
+# there is another symbol z. In this case z is called a free variable. The 
+# scoping rules of a language determine how values are assigned to free 
+# variables. Free variables are not formal arguments and are not local 
+# variables (assigned insided the function body).
 
-# Lexical scoping in R means that the values of free variables are searched for in the environment 
-# in which the function was defined. What is an environment?
-# An environment is a collection of (symbol, value) pairs
+# Lexical scoping in R means that the values of free variables are searched 
+# for in the environment in which the function was defined. What is an 
+# environment? An environment is a collection of (symbol, value) pairs
 
 
 # Lexical Scoping
 # Why does all this matter?
-# Typically, a function is defined in the global environment, so that the values of free variables are
-# just found in the user’s workspace
-# This behavior is logical for most people and is usually the “right thing” to do
-# However, in R you can have functions defined inside other functions
-# Languages like C don’t let you do this
-# Now things get interesting — In this case the environment in which a function is defined is the
+# Typically, a function is defined in the global environment, so that the 
+# values of free variables are just found in the user’s workspace. This 
+# behavior is logical for most people and is usually the “right thing” to do. 
+# However, in R you can have functions defined inside other functions languages 
+# like C don’t let you do this. Now things get interesting — In this case the 
+# environment in which a function is defined is the
 # body of another function!
 
 # Example
@@ -419,20 +459,25 @@ make.power <- function(n) {
   }
   pow
 }
+
 # This function returns another function as its value.
 cube <- make.power(3)
 square <- make.power(2)
+
 cube(3)
+# [1] 27
 square(3)
+# [1] 9
+
 # How to check what’s in a function’s environment?
 ls(environment(cube))
-# "n" "pow"
+# [1] "n"   "pow"
 get("n", environment(cube))
-# 3
+# [1] 3
 ls(environment(square))
-# "n" "pow"
+# [1] "n"   "pow"
 get("n", environment(square))
-# 2
+# [1] 2
 
 
 # Lexical vs. Dynamic Scoping
@@ -453,41 +498,47 @@ f(3)
 
 
 
-# With lexical scoping the value of y in the function g is looked up in the environment in which the
-# function was defined, in this case the global environment, so the value of y is 10.
-# With dynamic scoping, the value of y is looked up in the environment from which the function was
-# called (sometimes referred to as the calling environment).
-# In R the calling environment is known as the parent frame
-# So the value of y would be 2.
+# With lexical scoping the value of y in the function g is looked up in the 
+# environment in which the function was defined, in this case the global 
+# environment, so the value of y is 10. With dynamic scoping, the value of y 
+# is looked up in the environment from which the function was called 
+# (sometimes referred to as the calling environment). In R the calling 
+# environment is known as the parent frame So the value of y would be 2.
 
-# When a function is defined in the global environment and is subsequently called from the global
-# environment, then the defining environment and the calling environment are the same. This can
-# sometimes give the appearance of dynamic scoping.
+# When a function is defined in the global environment and is subsequently 
+# called from the global environment, then the defining environment and the 
+# calling environment are the same. This can sometimes give the appearance 
+# of dynamic scoping.
+
 g <- function(x) {
   a <- 3 # 'a' is local variable defined within the function
   x+a+y # 'y' is a free variables, 'x' is a formal argument
 }
+
 g(2)
 # Error in g(2) : object "y" not found
 y <- 3 # it will look like the 'y' was looked up within the calling environment
 g(2)
-# 8
+# [1] 8
+
 # actually 'y' is defined within the global environment
 
 
 # Consequences of Lexical Scoping
 # In R, all objects must be stored in memory
-# All functions must carry a pointer to their respective defining environments, which could be anywhere
-# In S-PLUS, free variables are always looked up in the global workspace, so everything can be
-# stored on the disk because the “defining environment” of all functions is the same.
-
+# All functions must carry a pointer to their respective defining environments, 
+# which could be anywhere. 
+# In S-PLUS, free variables are always looked up in the global workspace, 
+# so everything can be stored on the disk because the “defining environment” 
+# of all functions is the same.
 
 
 # Application: Optimization
-# Optimization routines in R like optim, nlm, and optimize require you to pass a function whose
-# argument is a vector of parameters (e.g. a log-likelihood)
-# However, an object function might depend on a host of other things besides its parameters (like data)
-# When writing software which does optimization, it may be desirable to allow the user to hold
+# Optimization routines in R like optim, nlm, and optimize require you to 
+# pass a function whose argument is a vector of parameters 
+# (e.g. a log-likelihood). However, an object function might depend on a host 
+# of other things besides its parameters (like data). When writing software 
+# which does optimization, it may be desirable to allow the user to hold
 # certain parameters fixed
 
 # Maximizing a Normal Likelihood
@@ -504,30 +555,33 @@ make.NegLogLik <- function(data, fixed=c(FALSE,FALSE)) {
     -(a + b)
   }
 }
+
 # Note: Optimization functions in R minimize functions, so you need to use the negative log-likelihood.
 
 set.seed(1); normals <- rnorm(100, 1, 2) # gives a normal dist, with mean = 1, sd = 2
 nLL <- make.NegLogLik(normals)
 nLL
-#function(p) {
-  #params[!fixed] <- p
-  #mu <- params[1]
-  #sigma <- params[2]
-  #a <- -0.5*length(data)*log(2*pi*sigma^2)
-  #b <- -0.5*sum((data-mu)^2) / (sigma^2)
-  #-(a + b)
-#}
-#<environment: 0x165b1a4>
+# function(p) {
+#   params[!fixed] <- p
+#   mu <- params[1]
+#   sigma <- params[2]
+#   a <- -0.5*length(data)*log(2*pi*sigma^2)
+#   b <- -0.5*sum((data-mu)^2) / (sigma^2)
+#   -(a + b)
+# }
+# <bytecode: 0x000002442588bf48>
+#   <environment: 0x000002442dae86a0>
+
 
 ls(environment(nLL))
-# "data" "fixed" "params"
+# [1] "data"   "fixed"  "params"
 
 
 
 # Estimating Parameters
 optim(c(mu = 0, sigma = 1), nLL)$par
-#     mu      sigma
-#1.218239   1.787343
+#     mu    sigma 
+# 1.218239 1.787343 
 
 # Fixing σ = 2 (sd)
 nLL <- make.NegLogLik(normals, c(FALSE, 2))
@@ -553,9 +607,10 @@ plot(x, exp(-(y - min(y))), type = "l")
 
 
 # Lexical Scoping Summary
-# Objective functions can be “built” which contain all of the necessary data for evaluating the function
-# No need to carry around long argument lists — useful for interactive and exploratory work.
-# Code can be simplified and cleand up
+# Objective functions can be “built” which contain all of the necessary data 
+# for evaluating the function. No need to carry around long argument 
+# lists — useful for interactive and exploratory work. Code can be simplified 
+# and cleand up,
 
 
 
@@ -568,7 +623,8 @@ plot(x, exp(-(y - min(y))), type = "l")
 
 
 # Dates in R
-# Dates are represented by the Date class and can be coerced from a character string using the as.Date() function.
+# Dates are represented by the Date class and can be coerced from a character 
+# string using the as.Date() function.
 x <- as.Date("1970-01-01")
 x
 ## [1] "1970-01-01"
@@ -579,18 +635,18 @@ unclass(as.Date("1970-01-02"))
 
 
 # Times in R
-# Times are represented using the POSIXct or the POSIXlt class
-# There are a number of generic functions that work on dates and times
-# POSIXct is just a very large integer under the hood; it use a useful class when you want to store
-# times in something like a data frame
-# POSIXlt is a list underneath and it stores a bunch of other useful information like the day of the
-# week, day of the year, month, day of the month
-# weekdays: give the day of the week
-# months: give the month name
-# quarters: give the quarter number (“Q1”, “Q2”, “Q3”, or “Q4”)
+# Times are represented using the POSIXct or the POSIXlt class. There are a 
+# number of generic functions that work on dates and times. POSIXct is just a 
+# very large integer under the hood; it use a useful class when you want 
+# to store times in something like a data frame. POSIXlt is a list underneath 
+# and it stores a bunch of other useful information like the day of the week, 
+# day of the year, month, day of the month weekdays: give the day of the week. 
+# months: give the month name. quarters: give the quarter number 
+# (“Q1”, “Q2”, “Q3”, or “Q4”)
 
 # Times in R
-# Times can be coerced from a character string using the as.POSIXlt or as.POSIXct function.
+# Times can be coerced from a character string using the as.POSIXlt or 
+# as.POSIXct function.
 x <- Sys.time()
 x
 ## [1] "2013-01-24 22:04:14 EST"
@@ -614,8 +670,10 @@ p <- as.POSIXlt(x)
 p$sec
 ## [1] 14.37
 
+
 # Times in R
-# Finally, there is the strptime function in case your dates are written in a different format
+# Finally, there is the strptime function in case your dates are 
+# written in a different format
 datestring <- c("January 10, 2012 10:40", "December 9, 2011 9:10")
 x <- strptime(datestring, "%B %d, %Y %H:%M")
 x
@@ -626,8 +684,8 @@ class(x)
 
 
 # Operations on Dates and Times
-# You can use mathematical operations on dates and times. Well, really just + and -. You can do
-# comparisons too (i.e. ==, <=)
+# You can use mathematical operations on dates and times. Well, really 
+# just + and -. You can do comparisons too (i.e. ==, <=)
 x <- as.Date("2012-01-01")
 y <- strptime("9 Jan 2011 11:34:21", "%d %b %Y %H:%M:%S")
 x-y # cannot be calculated
@@ -638,14 +696,15 @@ x <- as.POSIXlt(x)
 x-y # can be calculated
 ## Time difference of 356.3 days
 
+
 # Operations on Dates and Times
 # Even keeps track of leap years, leap seconds, daylight savings, and time zones.
 x <- as.Date("2012-03-01")
 y <- as.Date("2012-02-28")
 x-y # keeps track of leap year etc.
 ## Time difference of 2 days
+
 x <- as.POSIXct("2012-10-25 01:00:00")
 y <- as.POSIXct("2012-10-25 06:00:00", tz = "GMT")
 y-x # keeps track of the time zone difference
-## Time difference of 1 hours
-
+## Time difference of 11 hours
