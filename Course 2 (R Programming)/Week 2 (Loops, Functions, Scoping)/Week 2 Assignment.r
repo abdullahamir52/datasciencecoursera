@@ -1,3 +1,5 @@
+# To check the question and solve visit: 
+"https://rstudio-pubs-static.s3.amazonaws.com/220397_d07534a9d3de4d0d87d7df9036602296.html"
 
 dataset_url <- "https://d396qusza40orc.cloudfront.net/rprog%2Fdata%2Fspecdata.zip"
 download.file(dataset_url, "specdata.zip")

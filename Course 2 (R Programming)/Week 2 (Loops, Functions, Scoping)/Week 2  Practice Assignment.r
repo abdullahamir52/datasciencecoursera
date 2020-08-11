@@ -1,13 +1,14 @@
 # Practice Assignment
 # ========================================================
   
-# The goal of this assignment is to provide a "bridge" between the first two weeks
-# of lectures and assignment 1 for those either new to R or struggling with how 
-# to approach the assignment.
+# The goal of this assignment is to provide a "bridge" between the first two 
+# weeks of lectures and assignment 1 for those either new to R or struggling 
+# with how to approach the assignment.
 
-# This guided example, will **not** provide a solution for programming assignment 1.
-# However, it will guide you through some core concepts and give you some 
-# practical experience to hopefully make assignment 1 seems less daunting.
+# This guided example, will **not** provide a solution for programming 
+# assignment 1. However, it will guide you through some core concepts and 
+# give you some practical experience to hopefully make assignment 1 seems 
+# less daunting.
 
 # To begin, download this file and unzip it into your R working directory.  
 # http://s3.amazonaws.com/practice_assignment/diet_data.zip
@@ -40,8 +41,9 @@ head(andy)
 # 1         Andy  30    140   1
 # 2         Andy  30    140   2
 
-# It appears that the file has 4 columns, Patient.Name, Age, Weight, and Day. Let's
-# figure out how many rows there are by looking at the length of the 'Day' column:
+# It appears that the file has 4 columns, Patient.Name, Age, Weight, and Day. 
+# Let's figure out how many rows there are by looking at the length of the
+# 'Day' column:
   
 
 length(andy$Day)
@@ -138,7 +140,8 @@ head(read.csv(files[3]))
 # (technically prepend) the path to the file name for us.
 files_full <- list.files("diet_data", full.names=TRUE)
 files_full
-# [1] "diet_data/Andy.csv"  "diet_data/David.csv" "diet_data/John.csv"  "diet_data/Mike.csv"  "diet_data/Steve.csv"
+# [1] "diet_data/Andy.csv"  "diet_data/David.csv" "diet_data/John.csv"  
+# "diet_data/Mike.csv"  "diet_data/Steve.csv"
 
 # Pretty cool.  Now let's try taking a look at John.csv again:
 head(read.csv(files_full[3]))
@@ -286,8 +289,11 @@ weightmedian <- function(directory, day)  {
     #loops through the files, rbinding them together 
     dat <- rbind(dat, read.csv(files_list[i]))
   }
-  dat_subset <- dat[which(dat[, "Day"] == day),]  #subsets the rows that match the 'day' argument
-  median(dat_subset[, "Weight"], na.rm=TRUE)      #identifies the median weight 
+  dat_subset <- dat[which(dat[, "Day"] == day),]  
+  #subsets the rows that match the 'day' argument
+  
+  median(dat_subset[, "Weight"], na.rm=TRUE)      
+  #identifies the median weight 
   #while stripping out the NAs
 }
 
@@ -320,7 +326,7 @@ weightmedian("diet_data", 17)
 # Come back and revisit it (and the rest of this section) once you are able 
 # to write working functions using the approach above.
 
-# However, for those of you that do want to see a better way to create a dataframe....
+# However, for those who want to see a better way to create a dataframe....
 
 # The main issue with the approach above is growing an object inside of loop 
 # by copying and recopying it.  It works, but it's slow and if you've got a lot
