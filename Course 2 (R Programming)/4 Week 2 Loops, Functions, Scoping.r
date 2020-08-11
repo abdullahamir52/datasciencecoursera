@@ -1,5 +1,5 @@
 # Week 2 Control Structures
-# -------------------------
+# ------------------------
 
 
 # If else statement
