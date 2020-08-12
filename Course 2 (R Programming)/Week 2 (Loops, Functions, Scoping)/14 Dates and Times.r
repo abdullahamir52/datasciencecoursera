@@ -3,7 +3,7 @@
 # Dates are represented by the Date class
 # Times are represented by the POSIXct or the POSIXlt class
 # Dates are stored internally as the number of days since 1970-01-01
-# Tmes are stored internally as the number of seconds since 1970-01-01
+# Times are stored internally as the number of seconds since 1970-01-01
 
 
 # Dates in R
@@ -12,10 +12,13 @@
 x <- as.Date("1970-01-01")
 x
 ## [1] "1970-01-01"
+
 unclass(x)
 ## [1] 0
+
 unclass(as.Date("1970-01-02"))
 ## [1] 1
+
 
 
 # Times in R
@@ -34,10 +37,12 @@ unclass(as.Date("1970-01-02"))
 x <- Sys.time()
 x
 ## [1] "2013-01-24 22:04:14 EST"
+
 p <- as.POSIXlt(x)
 names(unclass(p))
-## [1] "sec" "min" "hour" "mday" "mon"
-## [6] "year" "wday" "yday" "isdst"
+# [1] "sec"    "min"    "hour"   "mday"   "mon"    "year"  
+# [7] "wday"   "yday"   "isdst"  "zone"   "gmtoff"
+
 p$sec
 ## [1] 14.34
 
@@ -46,25 +51,32 @@ p$sec
 x <- Sys.time()
 x ## Already in ‘POSIXct’ format
 ## [1] "2013-01-24 22:04:14 EST"
+
 unclass(x)
 ## [1] 1359083054
+
 x$sec
 ## Error: $ operator is invalid for atomic vectors
+
 p <- as.POSIXlt(x)
 p$sec
 ## [1] 14.37
 
 
+
 # Times in R
 # Finally, there is the strptime function in case your dates are 
 # written in a different format
+
 datestring <- c("January 10, 2012 10:40", "December 9, 2011 9:10")
 x <- strptime(datestring, "%B %d, %Y %H:%M")
 x
-## [1] "2012-01-10 10:40:00 EST" "2011-12-09 09:10:00 EST"
+# [1] "2012-01-10 10:40:00 +06" "2011-12-09 09:10:00 +06"
+
 class(x)
 ## [1] "POSIXlt" "POSIXt"
 # I can never remember the formatting strings. Check ?strptime for details.
+
 
 
 # Operations on Dates and Times
@@ -75,10 +87,13 @@ y <- strptime("9 Jan 2011 11:34:21", "%d %b %Y %H:%M:%S")
 x-y # cannot be calculated
 ## Warning: Incompatible methods ("-.Date",
 ## "-.POSIXt") for "-"
-## Error: non-numeric argument to binary operator
+# Error in x - y : non-numeric argument to binary operator
+# In addition: Warning message:
+#   Incompatible methods ("-.Date", "-.POSIXt") for "-" 
+
 x <- as.POSIXlt(x)
 x-y # can be calculated
-## Time difference of 356.3 days
+# Time difference of 356.7678 days
 
 
 # Operations on Dates and Times

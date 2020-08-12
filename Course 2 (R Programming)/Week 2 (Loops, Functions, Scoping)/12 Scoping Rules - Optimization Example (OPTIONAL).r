@@ -9,24 +9,30 @@
 # Maximizing a Normal Likelihood
 # Write a “constructor” function
 
-make.NegLogLik <- function(data, fixed=c(FALSE,FALSE)) {
+make.NegLogLik <- function(data, fixed=c(FALSE,FALSE)) 
+  {
   params <- fixed
-  function(p) {
-    params[!fixed] <- p
-    mu <- params[1]
-    sigma <- params[2]
-    a <- -0.5*length(data)*log(2*pi*sigma^2)
-    b <- -0.5*sum((data-mu)^2) / (sigma^2)
-    -(a + b)
+  function(p) 
+    {
+      params[!fixed] <- p
+      mu <- params[1]
+      sigma <- params[2]
+      a <- -0.5*length(data)*log(2*pi*sigma^2)
+      b <- -0.5*sum((data-mu)^2) / (sigma^2)
+      -(a + b)
+    }
   }
-}
 
-# Note: Optimization functions in R minimize functions, so you need to use the negative log-likelihood.
+# Note: Optimization functions in R minimize functions, so you need to use 
+# the negative log-likelihood.
 
-set.seed(1); normals <- rnorm(100, 1, 2) # gives a normal dist, with mean = 1, sd = 2
+set.seed(1); normals <- rnorm(100, 1, 2) 
+# gives a normal dist, with mean = 1, sd = 2
+
 nLL <- make.NegLogLik(normals)
 nLL
-# function(p) {
+# function(p) 
+# {
 #   params[!fixed] <- p
 #   mu <- params[1]
 #   sigma <- params[2]
@@ -34,8 +40,8 @@ nLL
 #   b <- -0.5*sum((data-mu)^2) / (sigma^2)
 #   -(a + b)
 # }
-# <bytecode: 0x000002442588bf48>
-#   <environment: 0x000002442dae86a0>
+# <bytecode: 0x000001f7ff6f98f0>
+#   <environment: 0x000001f7fd076cc8>
 
 
 ls(environment(nLL))
