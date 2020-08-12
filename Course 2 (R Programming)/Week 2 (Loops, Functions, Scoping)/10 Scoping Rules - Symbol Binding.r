@@ -13,7 +13,12 @@ lm
 # 1. Search the global environment for a symbol name matching the one requested.
 # 2. Search the namespaces of each of the packages on the search list
 # The search list can be found by using the search function.
+
 search()
+# [1] ".GlobalEnv"        "tools:rstudio"     "package:stats"    
+# [4] "package:graphics"  "package:grDevices" "package:utils"    
+# [7] "package:datasets"  "package:methods"   "Autoloads"        
+# [10] "package:base"  
 
 # The global environment or the user’s workspace is always the first element of 
 # the search list and the base package is always the last.
@@ -28,14 +33,16 @@ search()
 
 # Lexical Scoping
 # Consider the following function.
-f <- function(x, y) {
-  x^2 + y / z
+f <- function(x, y) 
+  {
+    x^2 + y / z
 }
+
 # This function has 2 formal arguments x and y. In the body of the function 
 # there is another symbol z. In this case z is called a free variable. The 
 # scoping rules of a language determine how values are assigned to free 
 # variables. Free variables are not formal arguments and are not local 
-# variables (assigned insided the function body).
+# variables (assigned inside the function body).
 
 # Lexical scoping in R means that the values of free variables are searched 
 # for in the environment in which the function was defined. What is an 

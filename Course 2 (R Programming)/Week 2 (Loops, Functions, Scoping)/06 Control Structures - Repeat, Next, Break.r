@@ -29,5 +29,5 @@ for(i in 1:40)
 # [1] 39
 # [1] 40
 
-# Control structures mentiond here are primarily useful for writing programs; 
+# Control structures mentioned here are primarily useful for writing programs; 
 # for command-line interactive work, the *apply functions are more useful.

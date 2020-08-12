@@ -8,14 +8,17 @@
 # environment in which a function is defined is the
 # body of another function!
 
+# Nested function
 # Example
 #--------
-make.power <- function(n) {
-  pow <- function(x) {
-    x^n # here, inside the pow fn, n is a free variable
+make.power <- function(n) 
+  {
+    pow <- function(x) 
+      {
+        x^n # here, inside the pow fn, n is a free variable
+      }
+    pow
   }
-  pow
-}
 
 # This function returns another function as its value.
 cube <- make.power(3)
@@ -31,6 +34,7 @@ ls(environment(cube))
 # [1] "n"   "pow"
 get("n", environment(cube))
 # [1] 3
+
 ls(environment(square))
 # [1] "n"   "pow"
 get("n", environment(square))
@@ -39,15 +43,17 @@ get("n", environment(square))
 
 # Lexical vs. Dynamic Scoping
 y <- 10 # this is the global environment value of 'y' for R
-f <- function(x) {
-  y <- 2 # this is the calling environment/parent frame in R for value of 'y'
-  y^2 + g(x) # within function f, both 'y' and 'g' are free variables
+f <- function(x) 
+  {
+    y <- 2 # this is the calling environment/parent frame in R for value of 'y'
+    y^2 + g(x) # within function f, both 'y' and 'g' are free variables
   
-}
+  }
 
-g <- function(x) {
-  x*y # here, 'y' is a free variable
-}
+g <- function(x) 
+  {
+    x*y # here, 'y' is a free variable
+  }
 
 # What is the value of
 f(3)
@@ -67,10 +73,11 @@ f(3)
 # calling environment are the same. This can sometimes give the appearance 
 # of dynamic scoping.
 
-g <- function(x) {
-  a <- 3 # 'a' is local variable defined within the function
-  x+a+y # 'y' is a free variables, 'x' is a formal argument
-}
+g <- function(x) 
+  {
+    a <- 3 # 'a' is local variable defined within the function
+    x+a+y # 'y' is a free variables, 'x' is a formal argument
+  }
 
 g(2)
 # Error in g(2) : object "y" not found

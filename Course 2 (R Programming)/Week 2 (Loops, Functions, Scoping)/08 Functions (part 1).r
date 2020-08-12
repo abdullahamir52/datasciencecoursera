@@ -55,19 +55,21 @@ above(x)
 
 
 # Creating a function that calculates the mean of each column of a matrix/df
-columnmean <- function(y) { # y is going to be the df/matrix in question
-  nc = ncol(y) # calculates the number of column in the df/matrix
+columnmean <- function(y) 
+  { # y is going to be the df/matrix in question
+    nc = ncol(y) # calculates the number of column in the df/matrix
   
-  # intialize a vector that stores the mean for each column
-  # length of the vector has to equal the number of columns
-  means <- numeric(nc)
-  for(i in 1:nc){
-    means[i]<- mean(y[,i])
-    # I haven't set a return value yet; this fn is not useful, yet. 
-  }
+    # intialize a vector that stores the mean for each column
+    # length of the vector has to equal the number of columns
+    means <- numeric(nc)
+    
+    for(i in 1:nc)
+      { means[i]<- mean(y[,i])
+        # I haven't set a return value yet; this fn is not useful, yet. 
+      }
   means
   # this is the last expression in the function = return value 
-}
+  }
 
 columnmean(airquality)
 # [1]        NA        NA  9.957516 77.882353  6.993464 15.803922
@@ -76,15 +78,18 @@ columnmean(airquality)
 # so add an argument to change the NA values 
 
 
-columnmean <- function(y, removeNA = TRUE) {
-  nc = ncol(y) 
+columnmean <- function(y, removeNA = TRUE) 
+  {
+    nc = ncol(y) 
   
-  means <- numeric(nc)
-  for(i in 1:nc){
-    means[i]<- mean(y[,i], na.rm = removeNA)
+    means <- numeric(nc)
+    
+    for(i in 1:nc)
+      {
+        means[i]<- mean(y[,i], na.rm = removeNA)
+      }
+    means
   }
-  means
-}
 
 columnmean(airquality)
 # [1]  42.129310 185.931507   9.957516  77.882353   6.993464  15.803922
@@ -100,7 +105,7 @@ columnmean(airquality)
 # Function arguments can be missing or might have default values
 
 
-# R functions arguments can be matched positionally or by name
+# R functions arguments can be matched position-wise or by name
 # So the following calls to sd are all equivalent
 mydata <- rnorm(100) # generate 100 random numbers
 sd(mydata) # specifying argument
@@ -109,7 +114,7 @@ sd(x = mydata, na.rm = FALSE) # whether to exclude the missing values or not
 sd(na.rm = FALSE, x = mydata) # Order does not matter if you name the args
 sd(na.rm = FALSE, mydata) 
 
-# Output of all of the 'sd' commands
+# Output of all of the 'sd' commands (depends on what data was generated)
 # [1] 0.9510843
 
 # if you name an arg, then the arg w/o name gets assigned in a 
@@ -149,16 +154,18 @@ lm(y - x, mydata, 1:100, model = FALSE)
 # Defining a Function
 # In addition to not specifying a default value, you can also set an 
 # argument value to NULL.
-f <- function(a, b = 1, c = 2, d = NULL) {
-}
+f <- function(a, b = 1, c = 2, d = NULL) 
+  {
+  }
 
 # Lazy Evaluation
 # Arguments to functions are evaluated lazily, so they are evaluated only as 
 # needed. This function never actually uses the argument b, so calling f(2) 
-# will not produce an error because the 2 gets positionally matched to a.
-f <- function(a, b) {
-  a^2
-}
+# will not produce an error because the 2 gets position-wise matched to a.
+f <- function(a, b) 
+  {
+    a^2
+  }
 
 f(2)
 # [1] 4
@@ -178,24 +185,28 @@ f(45)
 # This is because b did not have to be evaluated until after print(a). 
 # Once the function tried to evaluate print(b) it had to throw an error.
 
+
+
 # The “...” Argument
 # The ... argument indicate a variable number of arguments that are usually 
 # passed on to other functions.
 #... is often used when extending another function and you don’t want to copy 
 # the entire argument list of the original function
-myplot <- function(x, y, type = "l", ...) {
-  plot(x, y, type = type, ...)
-}
+myplot <- function(x, y, type = "l", ...) 
+  {
+    plot(x, y, type = type, ...)
+  }
 # Generic functions use ... so that extra arguments can be passed to methods 
 mean
 function (x, ...)
-  UseMethod("mean")
+UseMethod("mean")
 
 # The ... argument is also necessary when the number of arguments 
 # passed to the function cannot be known in advance.
 args(paste)
 # function (..., sep = " ", collapse = NULL, recycle0 = FALSE) 
 #   NULL
+
 args(cat)
 # function (..., file = "", sep = " ", fill = FALSE, 
 #           labels = NULL, append = FALSE) 
@@ -206,8 +217,11 @@ args(cat)
 # One catch with ... is that any arguments that appear after ... on the 
 # argument list must be named explicitly and cannot be partially matched.
 args(paste)
+# function (..., sep = " ", collapse = NULL, recycle0 = FALSE) 
+#   NULL
 
 paste("a", "b", sep = ":")
 # [1] "a:b"
+
 paste("a", "b", se = ":")
 # [1] "a b :"
