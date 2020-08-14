@@ -1,9 +1,28 @@
+# Looping on the Command Line
+# -----------------------------------
+
+# Writing for, while loops is useful when programming but not particularly 
+# easy when working interactively on the command line. There are some 
+# functions which implement looping to make life easier.
+
+# 1. lapply: Loop over a list of objects and evaluate a function on each element
+# 2. sapply: Same as lapply but try to simplify the result
+# 3. apply: Apply a function over the margins of an array (matrix)
+# 4. tapply: Apply a function over subsets of a vector (sort of table apply)
+# 5. mapply: Multivariate version of lapply
+
+# An auxiliary function split is also useful, particularly in conjunction 
+# with lapply.
+
+
 # 1 Loop Functions - lapply
 # ------------------------------
 
-# lapply takes three arguments: (1) a list X; (2) a function (or the name of a 
-# function) FUN; (3) other arguments via its ... argument. If X is not a list, 
-# it will be coerced to a list using as.list.
+# lapply takes three arguments: 
+# 1. a list X; 
+# 2. a function (or the name of a function) FUN; 
+# 3. other arguments via its ... argument. 
+# If X is not a list, it will be coerced to a list using as.list.
 
 lapply
 # function (X, FUN, ...) 
@@ -19,8 +38,8 @@ lapply
 
 # lapply always returns a list, regardless of the class of the input.
 x <- list(a = 1:5, b = rnorm(10))
-lapply(x, mean)
-# Output
+lapply(x, mean)  # applies the function 'mean' over both elements of the list
+# Output (output of lapply will always be a list)
 # $a
 # [1] 3
 # $b
@@ -41,9 +60,10 @@ lapply(x, mean)
 # [1] 4.964196
 
 
-
+# 'runif' generates a uniform random variable
+# ---------------------------------------------
 x <- 1:4
-lapply(x, runif)
+lapply(x, runif) 
 # Output
 # [[1]]
 # [1] 0.7603133
@@ -59,6 +79,12 @@ lapply(x, runif)
 
 
 
+# Now suppose I want to call the runif function on each one of these elements
+# of X but I didn't wanna generate a uniform between zero and one which is 
+# default. Suppose I want to generate a uniform between zero and ten, so now
+# I want put values into the arguments that are not default values. Particularly,
+# I want to change the max value. 
+# --------------------------------
 x <- 1:4
 lapply(x, runif, min = 0, max = 10)
 # Output
@@ -74,9 +100,14 @@ lapply(x, runif, min = 0, max = 10)
 # [[4]]
 # [1] 4.3403085 5.1700983 8.4624575 0.5516429
 
+# So, now the list I get out of this has random uniform that are in (0-10)
 
 
-# lapply and friends make heavy use of anonymous functions
+
+# lapply and friends make heavy use of anonymous functions (fn w/o names)
+# Suppose I create two matrices within a list (x). Now I want to extract the
+# first column of both matrices. 
+# ------------------------------
 x <- list(a = matrix(1:4, 2, 2), b = matrix(1:6, 3, 2))
 x
 # Output
@@ -94,7 +125,7 @@ x
 
 
 # An anonymous function for extracting the first column of each matrix.
-lapply(x, function(elt) elt[,1])
+lapply(x, function(elt) elt[,1]) # write a function on-the-go
 # Output
 # $a
 # [1] 1 2
@@ -102,15 +133,19 @@ lapply(x, function(elt) elt[,1])
 # $b
 # [1] 1 2 3
 
+# this function(elt) does not exist, except within the confines of lapply
+
 
 
 # sapply
+#-----------------------
 # sapply will try to simplify the result of lapply if possible.
 # If the result is a list where every element is length 1, 
 # then a vector is returned.
 # If the result is a list where every element is a vector of the same 
 # length (> 1), a matrix is returned.
 # If it can’t figure things out, a list is returned
+
 x <- list(a = 1:4, b = rnorm(10), c = rnorm(20, 1), d = rnorm(100, 5))
 lapply(x, mean)
 # $a
