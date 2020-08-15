@@ -2,7 +2,7 @@
 # ---------------------------
 
 # Functions for probability distributions in R
-# ---------------------------
+# -----------------------------------------------
 # rnorm: generate random Normal variates with a given mean 
 # and standard deviation
 
