@@ -31,12 +31,13 @@ log(-1)
 printmessage <- function(x) 
   {
     if(x > 0)
-      print("x is greater than zero")
+      print("The number is greater than zero")
     else
-      print("x is less than or equal to zero")
+      print("The number is less than or equal to zero")
   invisible(x)
   }
 
+# Invisible is a function that stops or prevents auto printing.
 
 printmessage(NA)
 # Output
@@ -49,21 +50,12 @@ printmessage(NA)
 printmessage2 <- function(x) 
   {
     if(is.na(x))
-      print("x is a missing value!")
+      print("The number is a missing value!")
     else if(x > 0)
-      print("x is greater than zero")
+      print("The number is greater than zero")
     else
-      print("x is less than or equal to zero")
+      print("The number is less than or equal to zero")
   invisible(x)
-  }
-
-
-printmessage2 <- function(x) 
-  {
-    if (is.na(x))
-      print("x is a missing value!") else if (x > 0)
-        print("x is greater than zero") else print("x is less than or equal to zero")
-    invisible(x)
   }
 
 x <- log(-1)
