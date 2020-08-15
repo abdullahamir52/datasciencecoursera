@@ -7,6 +7,14 @@ mean(x)
 traceback()
 # 1: mean(x)
 
+# The error just occurs like right away at the top of the mean function. 
+# So the function mean didn't actually call any other functions.
+# Because it couldn't evaluate your argument. And so, that's where the error 
+# occurs so, you know that may or may not be. Many times that's just that is 
+# where the error will occur at the top level function.
+# in this case the trace-back's not very handy.
+
+
 
 
 # Another page
@@ -23,10 +31,22 @@ traceback()
 # 2: eval(mf, parent.frame())
 # 1: lm(y ~ x)
 
+# When it evaluated the formula it couldn't find the actual value of y and x. 
+# So that's where the error occurred. Printing out something like this can be 
+# very useful. If you're trying to get help from someone else and you're kind 
+# of trying to debug your function together.
+
+
 
 
 # debug
 # ----------
+
+# First thing it will do is it will print out the entire code of the function, 
+# and this is a lot longer than so I just cut cut it off in the middle here but 
+# the first thing it does is it prints out the whole function body code. And 
+# then you get this little prompt at the bottom here the browse. So now you're 
+# in what's called the browser.And the browser is just like your r workspace.
 
 debug(lm)
 lm(y ~ x)
@@ -54,6 +74,19 @@ lm(y ~ x)
 #                     "offset"), names(mf), 0L)
 
 
+# Press 'n' to go to the next line in the function
+# Press 'Q' to exit the browser function
+
+
+
+
+# Recover
+# -------------------
+
+# I'm going to read that csv some file that doesn't exist. I get an error 
+# message, cannot open the connection. And get some warning also. But instead 
+# of getting my console back, I get a little menu here. And this menu is the 
+# function call stack.
 
 options(error = recover)
 read.csv("nosuchfile")
