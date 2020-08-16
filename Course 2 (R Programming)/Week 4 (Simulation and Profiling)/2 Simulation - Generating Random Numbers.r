@@ -1,8 +1,10 @@
 # Generating Random Numbers
 # ---------------------------
 
+
 # Functions for probability distributions in R
 # -----------------------------------------------
+
 # rnorm: generate random Normal variates with a given mean 
 # and standard deviation
 
@@ -12,6 +14,8 @@
 # pnorm: evaluate the cumulative distribution function for a Normal distribution
 
 # rpois: generate random Poisson variates with a given rate
+
+
 
 # Page 2
 
@@ -23,6 +27,9 @@
 # p for cumulative distribution
 # q for quantile function
 
+
+
+
 # Page 3 
 
 # Working with the Normal distributions requires using these four functions
@@ -33,7 +40,31 @@ qnorm(p, mean = 0, sd = 1, lower.tail = TRUE, log.p = FALSE)
 rnorm(n, mean = 0, sd = 1)
 
 # If Φ is the cumulative distribution function for a standard Normal 
-# distribution, then pnorm(q) = Φ(q) and qnorm(p) = Φ^−1 (p)
+# distribution, then pnorm(q) = Φ(q) and qnorm(p) = Φ^−1 (p) (inverse of phi)
+
+# All the functions have required that you specify the mean and the standard 
+# deviation, because that's what specifies the actual probability distribution. 
+# If you do not specify them, then the default values of a standard normal 
+# distribution are mean zero and standard deviation one.
+
+# For the dnorm function you can evaluate the density. And there's an option 
+# that allows you to evaluate the log of the density. Most of the time, when you 
+# evaluate the density function for a normal distribution, you're going to want 
+# to use the log of that value.
+
+# For the pnorm function and the qnorm function there's also an option to 
+# evaluate it on a log scale, but another option is to evaluate, is whether or 
+# not you want to evaluate the lower tail of the distribution. So the lower 
+# tail, which is the default, is the part that goes to the left. It's the lower 
+# tail. If you want to evaluate the upper tail, sometimes you want to do this. 
+# Then you want to say lower tail equals false, and that will evaluate the 
+# upper tail of the distribution. 
+
+# And finally for rnorm, there's only two parameters, mean and standard 
+# deviation, and an n, which is the number of random variables that you want 
+# to generate. So if n is 100, you'll get a vector of 100 numbers that are 
+# drawn from the, from the normal distribution
+
 
 x <- rnorm(10)
 x
@@ -55,6 +86,18 @@ summary(x)
 
 
 # Setting the random number seed with set.seed ensures reproducibility
+# ---------------------------------------------------------------------
+
+# So any time you simulate random numbers from any distribution for any purpose, 
+# it's very important that you set the random number generator seed. And this 
+# can be done with the 'set.seed' function. So on computers when you generate 
+# random numbers, the numbers are not actually random but they appear random 
+# and they're what are called pseudo random numbers. And if you wanted to 
+# generate the same set of random numbers again, you could if you wanted to 
+# because the numbers are not actually random. And so here I'm setting the 
+# seed to be one. So the seed can be any integer you want. Then once you need 
+# those numbers again, just set the seed back to the original number and it 
+# will generate the same numbers again. 
 
 set.seed(1)
 rnorm(5)
@@ -70,10 +113,13 @@ rnorm(5)
 # Always set the random number seed when conducting a simulation!
 
 
+
 # Generating Poisson data
 # -----------------------
-rpois(10, 1)
+rpois(10, 1) 
 # [1] 2 1 0 0 0 0 1 1 1 2
+# generating 10 poisson data with the rate of one (rate=mean)
+# poisson data are integers
 
 rpois(10, 2)
 # [1] 1 2 1 2 1 2 3 0 4 1
@@ -84,115 +130,19 @@ rpois(10, 20)
 ppois(2, 2) ## Cumulative distribution
 # [1] 0.6766764
 
+# What is the probability that a Poisson random variable is less than or equal 
+# to two if the rate is two. And so this is the probability. It's 0.67.
+
+
 ppois(4, 2)
 # [1] 0.947347
+
+# If I wanted to know what's the probability that a Poisson random variable 
+# with rate two is less than or equal to four. You can see the probability's 
+# getting bigger. 
 
 ppois(6, 2)
 # [1] 0.9954662
 
- 
-# Generating Random Numbers From a Linear Model
-# ----------------------------------------------
-
-# Suppose we want to simulate from the following linear model
-# y = β0 + β1x + ε
-
-# where, 
-# ε ∼ N (0, 2^2)
-# Assume, x ∼  N (0, 1^2), β0 = 0.5, and β1 = 2
-
-set.seed(20)
-x <- rnorm(100)
-e <- rnorm(100, 0, 2)
-y <- 0.5 + 2 * x + e
-
-summary(y)
-#     Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-# -6.4084 -1.5402  0.6789  0.6893  2.9303  6.5052 
-
-plot(x, y)
-# plot can be seen in the plot window
-
-
-
-# What if x is binary?
-# ----------------------
-
-set.seed(10)
-x <- rbinom(100, 1, 0.5)
-e <- rnorm(100, 0, 2)
-y <- 0.5 + 2 * x + e
-
-summary(y)
-#    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-# -3.4936 -0.1409  1.5767  1.4322  2.8397  6.9410 
-
-plot(x, y)
-# plot can be seen in the plot window
-
-
-# Generating Random Numbers From a Generalized Linear Model
-# ----------------------------------------------------------
-
-# Suppose we want to simulate from a Poisson model where
-
-# Y ~ Poisson(μ)
-# log μ = β0 + β1x
-# β0 = 0.5 and β1 = 0.3
-
-# We need to use the rpois function for this
-
-set.seed(1)
-x <- rnorm(100)
-log.mu <- 0.5 + 0.3 * x
-y <- rpois(100, exp(log.mu))
-
-summary(y)
-# Min.   1st Qu. Median   Mean   3rd Qu.  Max. 
-# 0.00    1.00    1.00    1.55    2.00    6.00 
-
-plot(x, y)
-
-
-# Random Sampling
-# -----------------
-
-# The sample function draws randomly from a specified set of (scalar) objects 
-# allowing you to sample from arbitrary distributions.
-
-set.seed(1)
-
-sample(1:10, 4)
-# [1] 3 4 5 7
-
-sample(1:10, 4)
-# [1] 3 9 8 5
-
-sample(letters, 5)
-# [1] "q" "b" "e" "x" "p"
-
-sample(1:10) ## permutation
-#  [1]  4  7 10  6  9  2  8  3  1  5
-
-sample(1:10)
-#  [1]  2  3  4  1  9  5 10  8  6  7
-
-sample(1:10, replace = TRUE) ## Sample w/replacement
-#  [1] 2 9 7 8 2 8 5 9 7 8
-
-
-
-# Simulation
-# Summary
-# -------------------
-
-# Drawing samples from specific probability distributions can be done 
-# with r* functions.
-
-# Standard distributions are built in: Normal, Poisson, Binomial, 
-# Exponential, Gamma, etc.
-
-# The sample function can be used to draw random samples from arbitrary vectors.
-
-# Setting the random number generator seed via set.seed is critical 
-# for reproducibility.
+# And here I can see the probability that a Poisson random variable is less 
+# than six. Less than or equal to six, and it's very close to one.
