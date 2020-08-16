@@ -18,7 +18,7 @@ summary(y)
 # -6.4084 -1.5402  0.6789  0.6893  2.9303  6.5052 
 
 plot(x, y)
-# plot can be seen in the plot window
+# plot can be seen in the plot window (3 Simulation - Plot 1)
 
 
 
@@ -37,7 +37,7 @@ summary(y)
 # -3.4936 -0.1409  1.5767  1.4322  2.8397  6.9410 
 
 plot(x, y)
-# plot can be seen in the plot window
+# plot can be seen in the plot window (3 Simulation - Plot 2)
 
 # x variable is binary but y variable is continuous
 
@@ -78,6 +78,7 @@ summary(y)
 # 0.00    1.00    1.00    1.55    2.00    6.00 
 
 plot(x, y)
+# plot can be seen in the plot window (3 Simulation - Plot 3)
 
 # So when we summarize this, you'll see that the mean is about 1.5 and our 
 # range is between zero and six. When I plot this data, you'll see that they 
