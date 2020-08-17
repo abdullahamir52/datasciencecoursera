@@ -1,6 +1,12 @@
 # --------------------------------
 # How swirl works
 
+library(swirl)
+# to enter swirl
+
+swirl()
+# whenever you want to begin swirl()
+
 # Press esc key to exit swirl and return to the r prompt
 # If you are already at the prompt, type bye() to exit and save your progress. 
 
