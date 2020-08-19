@@ -530,6 +530,3 @@ rankall <- function(outcome, num = "best") {
                 , by = state, .SDcols = c("hospital name") ])
   
 }
-
-
-
