@@ -21,5 +21,6 @@ z * 2 + 100
 # basically, z * 2 + 100 = z * c(2, 2, 2) + c(100, 100, 100).
 # R recycles the shorter vector until it is the same length of the longer one
 
+
 # type the first two letters of a variable and hit the tabkey,
 # it will show you the variables associated with those letters
